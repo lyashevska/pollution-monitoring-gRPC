@@ -1,4 +1,4 @@
-package grpc.poluttionMonitoring;
+package grpc.medicalWaste;
 
 import static io.grpc.MethodDescriptor.generateFullMethodName;
 import static io.grpc.stub.ClientCalls.asyncBidiStreamingCall;
@@ -27,30 +27,30 @@ public final class medicalWasteServiceGrpc {
   public static final String SERVICE_NAME = "medicalWasteService";
 
   // Static method descriptors that strictly reflect the proto.
-  private static volatile io.grpc.MethodDescriptor<grpc.poluttionMonitoring.containsBagId,
-      grpc.poluttionMonitoring.containsBagId> getGetBagIdMethod;
+  private static volatile io.grpc.MethodDescriptor<grpc.medicalWaste.containsBagId,
+      grpc.medicalWaste.containsBagId> getGetBagIdMethod;
 
   @io.grpc.stub.annotations.RpcMethod(
       fullMethodName = SERVICE_NAME + '/' + "GetBagId",
-      requestType = grpc.poluttionMonitoring.containsBagId.class,
-      responseType = grpc.poluttionMonitoring.containsBagId.class,
+      requestType = grpc.medicalWaste.containsBagId.class,
+      responseType = grpc.medicalWaste.containsBagId.class,
       methodType = io.grpc.MethodDescriptor.MethodType.UNARY)
-  public static io.grpc.MethodDescriptor<grpc.poluttionMonitoring.containsBagId,
-      grpc.poluttionMonitoring.containsBagId> getGetBagIdMethod() {
-    io.grpc.MethodDescriptor<grpc.poluttionMonitoring.containsBagId, grpc.poluttionMonitoring.containsBagId> getGetBagIdMethod;
+  public static io.grpc.MethodDescriptor<grpc.medicalWaste.containsBagId,
+      grpc.medicalWaste.containsBagId> getGetBagIdMethod() {
+    io.grpc.MethodDescriptor<grpc.medicalWaste.containsBagId, grpc.medicalWaste.containsBagId> getGetBagIdMethod;
     if ((getGetBagIdMethod = medicalWasteServiceGrpc.getGetBagIdMethod) == null) {
       synchronized (medicalWasteServiceGrpc.class) {
         if ((getGetBagIdMethod = medicalWasteServiceGrpc.getGetBagIdMethod) == null) {
           medicalWasteServiceGrpc.getGetBagIdMethod = getGetBagIdMethod = 
-              io.grpc.MethodDescriptor.<grpc.poluttionMonitoring.containsBagId, grpc.poluttionMonitoring.containsBagId>newBuilder()
+              io.grpc.MethodDescriptor.<grpc.medicalWaste.containsBagId, grpc.medicalWaste.containsBagId>newBuilder()
               .setType(io.grpc.MethodDescriptor.MethodType.UNARY)
               .setFullMethodName(generateFullMethodName(
                   "medicalWasteService", "GetBagId"))
               .setSampledToLocalTracing(true)
               .setRequestMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  grpc.poluttionMonitoring.containsBagId.getDefaultInstance()))
+                  grpc.medicalWaste.containsBagId.getDefaultInstance()))
               .setResponseMarshaller(io.grpc.protobuf.ProtoUtils.marshaller(
-                  grpc.poluttionMonitoring.containsBagId.getDefaultInstance()))
+                  grpc.medicalWaste.containsBagId.getDefaultInstance()))
                   .setSchemaDescriptor(new medicalWasteServiceMethodDescriptorSupplier("GetBagId"))
                   .build();
           }
@@ -91,8 +91,8 @@ public final class medicalWasteServiceGrpc {
      * unary
      * </pre>
      */
-    public void getBagId(grpc.poluttionMonitoring.containsBagId request,
-        io.grpc.stub.StreamObserver<grpc.poluttionMonitoring.containsBagId> responseObserver) {
+    public void getBagId(grpc.medicalWaste.containsBagId request,
+        io.grpc.stub.StreamObserver<grpc.medicalWaste.containsBagId> responseObserver) {
       asyncUnimplementedUnaryCall(getGetBagIdMethod(), responseObserver);
     }
 
@@ -102,8 +102,8 @@ public final class medicalWasteServiceGrpc {
             getGetBagIdMethod(),
             asyncUnaryCall(
               new MethodHandlers<
-                grpc.poluttionMonitoring.containsBagId,
-                grpc.poluttionMonitoring.containsBagId>(
+                grpc.medicalWaste.containsBagId,
+                grpc.medicalWaste.containsBagId>(
                   this, METHODID_GET_BAG_ID)))
           .build();
     }
@@ -132,8 +132,8 @@ public final class medicalWasteServiceGrpc {
      * unary
      * </pre>
      */
-    public void getBagId(grpc.poluttionMonitoring.containsBagId request,
-        io.grpc.stub.StreamObserver<grpc.poluttionMonitoring.containsBagId> responseObserver) {
+    public void getBagId(grpc.medicalWaste.containsBagId request,
+        io.grpc.stub.StreamObserver<grpc.medicalWaste.containsBagId> responseObserver) {
       asyncUnaryCall(
           getChannel().newCall(getGetBagIdMethod(), getCallOptions()), request, responseObserver);
     }
@@ -162,7 +162,7 @@ public final class medicalWasteServiceGrpc {
      * unary
      * </pre>
      */
-    public grpc.poluttionMonitoring.containsBagId getBagId(grpc.poluttionMonitoring.containsBagId request) {
+    public grpc.medicalWaste.containsBagId getBagId(grpc.medicalWaste.containsBagId request) {
       return blockingUnaryCall(
           getChannel(), getGetBagIdMethod(), getCallOptions(), request);
     }
@@ -191,8 +191,8 @@ public final class medicalWasteServiceGrpc {
      * unary
      * </pre>
      */
-    public com.google.common.util.concurrent.ListenableFuture<grpc.poluttionMonitoring.containsBagId> getBagId(
-        grpc.poluttionMonitoring.containsBagId request) {
+    public com.google.common.util.concurrent.ListenableFuture<grpc.medicalWaste.containsBagId> getBagId(
+        grpc.medicalWaste.containsBagId request) {
       return futureUnaryCall(
           getChannel().newCall(getGetBagIdMethod(), getCallOptions()), request);
     }
@@ -218,8 +218,8 @@ public final class medicalWasteServiceGrpc {
     public void invoke(Req request, io.grpc.stub.StreamObserver<Resp> responseObserver) {
       switch (methodId) {
         case METHODID_GET_BAG_ID:
-          serviceImpl.getBagId((grpc.poluttionMonitoring.containsBagId) request,
-              (io.grpc.stub.StreamObserver<grpc.poluttionMonitoring.containsBagId>) responseObserver);
+          serviceImpl.getBagId((grpc.medicalWaste.containsBagId) request,
+              (io.grpc.stub.StreamObserver<grpc.medicalWaste.containsBagId>) responseObserver);
           break;
         default:
           throw new AssertionError();
@@ -243,7 +243,7 @@ public final class medicalWasteServiceGrpc {
 
     @java.lang.Override
     public com.google.protobuf.Descriptors.FileDescriptor getFileDescriptor() {
-      return grpc.poluttionMonitoring.MedicalWasteImpl.getDescriptor();
+      return grpc.medicalWaste.MedicalWasteImpl.getDescriptor();
     }
 
     @java.lang.Override
