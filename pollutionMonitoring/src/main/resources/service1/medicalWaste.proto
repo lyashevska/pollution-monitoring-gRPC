@@ -1,0 +1,14 @@
+syntax = "proto3";
+option java_package = "grpc.poluttionMonitoring";
+option java_multiple_files = true;
+option java_outer_classname = "MedicalWasteImpl";
+
+service medicalWasteService {
+	// unary
+	rpc GetBagId(containsBagId) returns (containsBagId){}
+}
+
+message containsBagId {
+	string tagRequest = 1;
+	string tagResponse = 2;
+}
