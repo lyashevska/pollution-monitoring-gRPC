@@ -2,6 +2,8 @@ package grpc.medicalWaste;
 
 import java.util.concurrent.TimeUnit;
 
+import javax.jmdns.ServiceInfo;
+
 import grpc.medicalWaste.medicalWasteServiceGrpc.medicalWasteServiceBlockingStub;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
@@ -9,11 +11,19 @@ import io.grpc.ManagedChannelBuilder;
 public class MedicalWasteClient {
 
 	public static void main(String[] args) throws InterruptedException {
-		// build a channel
-		int port = 50051;
-		String host = "localhost";
 
-		ManagedChannel newChannel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
+		ServiceInfo serviceInfo;
+		String service_type = "_grpc._tcp.local.";
+		serviceInfo = SimpleServiceDiscovery.run(service_type);
+		int port = serviceInfo.getPort();
+		String host = "localhost";
+		
+		// build a channel
+
+		ManagedChannel newChannel = ManagedChannelBuilder.
+				forAddress(host, port)
+				.usePlaintext()
+				.build();
 		
 		// build a message 
 		containsBagId cString = containsBagId.newBuilder().setTagRequest("12345").build();

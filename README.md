@@ -1,6 +1,8 @@
-University Hospital Galway pollution monitoring system 
+This Distributed System project makes use of Protocol Buffers and gRPC.
 
-There are 4 services that publish themselves and discover each other via gRPC:
+Java implementation of multi-cast DNS (JmDNS) allows services to publish themselves and to discover each other.
+
+This system is designed for University Hospital Galway pollution monitoring system and includes 4 services:
 
 - Service 1. Medical waste tracking
 - Service 2. Ventilation -heat

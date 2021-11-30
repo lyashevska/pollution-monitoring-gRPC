@@ -1,6 +1,7 @@
 package grpc.medicalWaste;
 
 import java.io.IOException;
+import java.lang.System.Logger;
 
 import grpc.medicalWaste.medicalWasteServiceGrpc.medicalWasteServiceImplBase;
 import io.grpc.Server;
@@ -11,28 +12,34 @@ import io.grpc.stub.StreamObserver;
  * @author olga
  *
  */
-public class MedicalWasteServer {
 
-	private Server server;
+public class MedicalWasteServer extends medicalWasteServiceImplBase {
+	
+	// private static final Logger logger = Logger.getLogger(MedicalWasteServer.class.getName());
 
-	public static void main(String[] args) throws IOException, InterruptedException {
+	public static void main(String[] args) {
 
-		final MedicalWasteServer ourServer = new MedicalWasteServer();
-		ourServer.start();
-	}
-
-	private void start() throws IOException, InterruptedException {
-		System.out.println("Starting gRPC Server");
-		int port = 50051;
-		server = ServerBuilder.forPort(port).addService(new NewServerImpl()).build().start();
-		System.out.println("Server running on port: " + port);
+		MedicalWasteServer service1 = new MedicalWasteServer();
 		
+		int port = 50051;
+		String service_type = "_grpc._tcp.local.";
+		String service_name = "GrpcServer";
+		SimpleServiceRegistration ssr = new SimpleServiceRegistration();
+		ssr.run(port, service_type, service_name);
+		
+
+	try {
+		Server server = ServerBuilder.forPort(port)
+				.addService(service1)
+				.build()
+				.start();
+		
+		System.out.println("Server started, listening on " + port);
 		server.awaitTermination();
-
+	} catch(Exception e) {
+		System.out.println(e);
 	}
-
-	// Extend abstract base class for our implementation
-	static class NewServerImpl extends medicalWasteServiceImplBase {
+}
 		
 		@Override
 		public void getBagId(containsBagId request, StreamObserver<containsBagId> responseObserver) {
@@ -47,7 +54,6 @@ public class MedicalWasteServer {
 			responseObserver.onNext(response.build());
 			responseObserver.onCompleted();
 
-		}
 
 	}
 
