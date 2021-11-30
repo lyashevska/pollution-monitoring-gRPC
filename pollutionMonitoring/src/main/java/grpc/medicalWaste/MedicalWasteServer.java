@@ -33,6 +33,7 @@ public class MedicalWasteServer {
 
 	// Extend abstract base class for our implementation
 	static class NewServerImpl extends medicalWasteServiceImplBase {
+		
 		@Override
 		public void getBagId(containsBagId request, StreamObserver<containsBagId> responseObserver) {
 			// find out what was sent by the client
@@ -42,10 +43,9 @@ public class MedicalWasteServer {
 			// now build our response
 			containsBagId.Builder response = containsBagId.newBuilder();
 
-			response.setTagResponse("Our first response string: " + tagRequest);
+			response.setTagResponse("Information about " + tagRequest + " retrieved");
 			responseObserver.onNext(response.build());
 			responseObserver.onCompleted();
-			
 
 		}
 
