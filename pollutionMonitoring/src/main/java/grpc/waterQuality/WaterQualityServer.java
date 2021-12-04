@@ -22,7 +22,7 @@ public class WaterQualityServer extends waterSampleServiceImplBase {
 	public static void main(String[] args) {
 		WaterQualityServer service3 = new WaterQualityServer();
 
-		int port = 50051;
+		int port = 50053;
 		String service_type = "_grpc._tcp.local.";
 		String service_name = "GrpcServer";
 		SimpleServiceRegistration ssr = new SimpleServiceRegistration();
