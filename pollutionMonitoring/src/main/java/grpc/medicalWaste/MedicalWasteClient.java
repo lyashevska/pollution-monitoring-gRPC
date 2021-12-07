@@ -8,12 +8,16 @@ import grpc.medicalWaste.medicalWasteServiceGrpc.medicalWasteServiceBlockingStub
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 
+/**
+ * @author olga
+ *
+ */
 public class MedicalWasteClient {
 
 	public static void main(String[] args) throws InterruptedException {
 
 		ServiceInfo serviceInfo;
-		String service_type = "_grpc._tcp.local.";
+		String service_type = "_waste._tcp.local.";
 		serviceInfo = SimpleServiceDiscovery.run(service_type);
 		int port = serviceInfo.getPort();
 		String host = "localhost";
