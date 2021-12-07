@@ -6,24 +6,25 @@ import java.lang.System.Logger;
 import grpc.medicalWaste.SimpleServiceRegistration;
 import grpc.medicalWaste.medicalWasteServiceGrpc.medicalWasteServiceImplBase;
 import grpc.waterQuality.waterSampleServiceGrpc.waterSampleServiceImplBase;
+
 import io.grpc.Server;
 import io.grpc.ServerBuilder;
 import io.grpc.stub.StreamObserver;
 
 /**
- * @author olga bidirectional 
+ * @author olga bidirectional streaming api server for a water quality service
+ *         runs on port 50053 and uses jmdns for registration
  */
 
 public class WaterQualityServer extends waterSampleServiceImplBase {
 
-	// private static final Logger logger =
-	// Logger.getLogger(MedicalWasteServer.class.getName());
+	//private static final Logger logger = Logger.getLogger(MedicalWasteServer.class.getName());
 
 	public static void main(String[] args) {
 		WaterQualityServer service3 = new WaterQualityServer();
 
 		int port = 50053;
-		String service_type = "_grpc._tcp.local.";
+		String service_type = "_water._tcp.local.";
 		String service_name = "GrpcServer";
 		SimpleServiceRegistration ssr = new SimpleServiceRegistration();
 		ssr.run(port, service_type, service_name);
@@ -36,30 +37,35 @@ public class WaterQualityServer extends waterSampleServiceImplBase {
 		} catch (Exception e) {
 			System.out.println(e);
 		}
+		
 	}
 
 	@Override
 	public StreamObserver<SampleRequest> createSample(StreamObserver<SampleResponse> responseObserver) {
-		StreamObserver<SampleRequest> requestObserver = new StreamObserver<SampleRequest>() {
+			
+		   StreamObserver<SampleRequest> requestObserver = new StreamObserver<SampleRequest>() {
 
 			@Override
+			// every time sample request is received 
 			public void onNext(SampleRequest value) {
+				
 				String result = "Sample id is: " + value.getId();
+				
+				// response
 				SampleResponse sampleResponse = SampleResponse.newBuilder().setSampleId(result).build();
+				
+				// send message back to response observer
 				responseObserver.onNext(sampleResponse);
 			}
 
 			@Override
 			public void onError(Throwable t) {
-				// TODO Auto-generated method stub
-
 			}
 
 			@Override
 			public void onCompleted() {
 				responseObserver.onCompleted();
 			}
-
 		};
 		return requestObserver;
 	}

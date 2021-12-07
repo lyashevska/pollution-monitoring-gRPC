@@ -88,7 +88,7 @@ public final class medicalWasteServiceGrpc {
 
     /**
      * <pre>
-     * unary
+     * unary api
      * </pre>
      */
     public void getBagId(grpc.medicalWaste.containsBagId request,
@@ -129,7 +129,7 @@ public final class medicalWasteServiceGrpc {
 
     /**
      * <pre>
-     * unary
+     * unary api
      * </pre>
      */
     public void getBagId(grpc.medicalWaste.containsBagId request,
@@ -159,7 +159,7 @@ public final class medicalWasteServiceGrpc {
 
     /**
      * <pre>
-     * unary
+     * unary api
      * </pre>
      */
     public grpc.medicalWaste.containsBagId getBagId(grpc.medicalWaste.containsBagId request) {
@@ -188,7 +188,7 @@ public final class medicalWasteServiceGrpc {
 
     /**
      * <pre>
-     * unary
+     * unary api
      * </pre>
      */
     public com.google.common.util.concurrent.ListenableFuture<grpc.medicalWaste.containsBagId> getBagId(

@@ -10,7 +10,10 @@ import io.grpc.stub.StreamObserver;
 
 /**
  * @author olga
- *
+ * unary api
+ * server for a medical waste service
+ * runs on port 50051 and uses jmdns for registration 
+ * 
  */
 
 public class MedicalWasteServer extends medicalWasteServiceImplBase {
@@ -22,7 +25,7 @@ public class MedicalWasteServer extends medicalWasteServiceImplBase {
 		MedicalWasteServer service1 = new MedicalWasteServer();
 		
 		int port = 50051;
-		String service_type = "_grpc._tcp.local.";
+		String service_type = "_waste._tcp.local.";
 		String service_name = "GrpcServer";
 		SimpleServiceRegistration ssr = new SimpleServiceRegistration();
 		ssr.run(port, service_type, service_name);
