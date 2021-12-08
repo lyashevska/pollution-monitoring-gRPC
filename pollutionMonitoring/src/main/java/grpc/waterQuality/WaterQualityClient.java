@@ -69,6 +69,7 @@ public class WaterQualityClient {
 		// we expect 3 messages back
 		// onNext called many times
 
+		@SuppressWarnings("resource")
 		Scanner sc = new Scanner(System.in);
 		System.out.println("Enter sample id to retrieve: ");
 

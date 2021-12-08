@@ -5,12 +5,10 @@ option java_multiple_files = true;
 option java_outer_classname = "MedicalWasteImpl";
 
 service medicalWasteService {
-	// unary
-	rpc GetBagId(containsBagId) returns (containsBagId){}
 
-	// client streaming
-	// rpc GetBagId(stream containsBagId) returns (containsBagId){}
-
+	// unary api
+	rpc GetBagId (containsBagId) returns (containsBagId) {
+	}
 }
 
 message containsBagId {

@@ -46,6 +46,7 @@ public class MedicalWasteServer extends medicalWasteServiceImplBase {
 		
 		@Override
 		public void getBagId(containsBagId request, StreamObserver<containsBagId> responseObserver) {
+			
 			// find out what was sent by the client
 			String tagRequest = request.getTagRequest();
 			System.out.println("Tag requested is " + tagRequest);

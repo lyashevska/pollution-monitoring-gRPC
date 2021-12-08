@@ -1,14 +1,17 @@
 package gui;
 
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.concurrent.CountDownLatch;
 
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -44,17 +47,17 @@ public class App implements ActionListener {
 	private JPanel getService1JPanel() {
 
 		JPanel panel = new JPanel();
-
-		BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
-
-		JLabel label = new JLabel("Request bag id");
+		BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
+		
+		// create an instance of a label
+		JLabel label = new JLabel("Bag id");
 		panel.add(label);
 		panel.add(Box.createRigidArea(new Dimension(10, 0)));
 		entry1 = new JTextField("", 10);
 		panel.add(entry1);
 		panel.add(Box.createRigidArea(new Dimension(10, 0)));
 
-		JButton button = new JButton("Invoke service 1");
+		JButton button = new JButton("Request bag id");
 		button.addActionListener(this);
 		panel.add(button);
 		panel.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -62,9 +65,7 @@ public class App implements ActionListener {
 		reply1 = new JTextField("", 10);
 		reply1.setEditable(false);
 		panel.add(reply1);
-
 		panel.setLayout(boxlayout);
-
 		return panel;
 
 	}
@@ -73,7 +74,7 @@ public class App implements ActionListener {
 
 		JPanel panel = new JPanel();
 
-		BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
+		BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
 
 		JLabel label = new JLabel("Enter value");
 		panel.add(label);
@@ -90,9 +91,7 @@ public class App implements ActionListener {
 		reply2 = new JTextField("", 10);
 		reply2.setEditable(false);
 		panel.add(reply2);
-
 		panel.setLayout(boxlayout);
-
 		return panel;
 
 	}
@@ -101,16 +100,18 @@ public class App implements ActionListener {
 
 		JPanel panel = new JPanel();
 
-		BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
+		BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
 
-		JLabel label = new JLabel("Request sample id");
+		
+		JLabel label = new JLabel("Sample id");
 		panel.add(label);
+		
 		panel.add(Box.createRigidArea(new Dimension(10, 0)));
 		entry3 = new JTextField("", 10);
 		panel.add(entry3);
 		panel.add(Box.createRigidArea(new Dimension(10, 0)));
 
-		JButton button = new JButton("Invoke service 3");
+		JButton button = new JButton("Request sample id");
 		button.addActionListener(this);
 		panel.add(button);
 		panel.add(Box.createRigidArea(new Dimension(10, 0)));
@@ -118,9 +119,7 @@ public class App implements ActionListener {
 		reply3 = new JTextField("", 10);
 		reply3.setEditable(false);
 		panel.add(reply3);
-
 		panel.setLayout(boxlayout);
-
 		return panel;
 
 	}
@@ -129,7 +128,7 @@ public class App implements ActionListener {
 
 		JPanel panel = new JPanel();
 
-		BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.X_AXIS);
+		BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
 
 		JLabel label = new JLabel("Enter value");
 		panel.add(label);
@@ -146,9 +145,7 @@ public class App implements ActionListener {
 		reply4 = new JTextField("", 10);
 		reply4.setEditable(false);
 		panel.add(reply4);
-
 		panel.setLayout(boxlayout);
-
 		return panel;
 
 	}
@@ -159,14 +156,13 @@ public class App implements ActionListener {
 	}
 
 	private void build() {
-
+		
+		// create an instance of frame
 		JFrame frame = new JFrame("Pollution Monitoring");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 		// Set the panel to add buttons
 		JPanel panel = new JPanel();
 
-		// Set the BoxLayout to be X_AXIS: from left to right
 		BoxLayout boxlayout = new BoxLayout(panel, BoxLayout.Y_AXIS);
 
 		panel.setLayout(boxlayout);
@@ -180,12 +176,16 @@ public class App implements ActionListener {
 		panel.add(getService4JPanel());
 
 		// Set size for the frame
-		frame.setSize(400, 300);
+		frame.setSize(420, 420);
 
 		// Set the window to be visible as the default to be false
 		frame.add(panel);
 		frame.pack();
+		
+		// make frame visible
 		frame.setVisible(true);
+
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
 	@Override
@@ -193,7 +193,7 @@ public class App implements ActionListener {
 		JButton button = (JButton) e.getSource();
 		String label = button.getActionCommand();
 
-		if (label.equals("Invoke service 1")) {
+		if (label.equals("Request bag id")) {
 			System.out.println("Medical Waste Service to be invoked ...");
 
 			// jmdns
@@ -227,7 +227,7 @@ public class App implements ActionListener {
 
 			// insert here
 			
-		} else if (label.equals("Invoke service 3")) {
+		} else if (label.equals("Request sample id")) {
 
 			System.out.println("Water Quality Service to be invoked ...");
 
@@ -253,7 +253,7 @@ public class App implements ActionListener {
 
 				@Override
 				public void onNext(SampleResponse value) {
-					System.out.println("Response from server: " + value.getSampleId());
+					reply3.setText(value.getSampleId());
 				}
 
 				@Override
@@ -269,15 +269,25 @@ public class App implements ActionListener {
 				}
 			});
 			
+			String sampleId1 = entry3.getText();
+			
+			// a list of one element
 			try {
-				requestObserver.onNext(SampleRequest.newBuilder().setId(entry3.getText()).build());
+				Arrays.asList(sampleId1).forEach(id -> {
+					System.out.println("Sending: " + id);
+					// reply3.setText();
+					requestObserver.onNext(SampleRequest.newBuilder().setId(id).build());
+				})
+				;
 
-				// Mark the end of requests
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+
+				// done sending request
 				requestObserver.onCompleted();
-				
-				// retrieving reply from server
-				// HERE
-			    reply3.setText("Awaiting for response");
 
 				// Sleep for a bit before sending the next one.
 				Thread.sleep(new Random().nextInt(1000) + 500);

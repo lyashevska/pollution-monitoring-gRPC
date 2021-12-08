@@ -1,5 +1,6 @@
 package grpc.medicalWaste;
 
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 import javax.jmdns.ServiceInfo;
@@ -30,7 +31,17 @@ public class MedicalWasteClient {
 				.build();
 		
 		// build a message 
-		containsBagId cString = containsBagId.newBuilder().setTagRequest("12345").build();
+
+		// input validation 
+		String input = "";
+		Scanner sc = new Scanner(System.in);
+		System.out.println("Enter tag id to retrieve: ");
+		
+		if(sc.hasNext()) {
+			input = sc.next();
+		}
+		
+		containsBagId cString = containsBagId.newBuilder().setTagRequest(input).build();
 		
 		// create a stub
 		// the stub is specific to the service
