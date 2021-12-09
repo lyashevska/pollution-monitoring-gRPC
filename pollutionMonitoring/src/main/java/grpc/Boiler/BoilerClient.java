@@ -5,7 +5,11 @@ import io.grpc.ManagedChannelBuilder;
 
 import io.grpc.stub.StreamObserver;
 
+import javax.jmdns.ServiceInfo;
 import javax.swing.*;
+
+import grpc.medicalWaste.SimpleServiceDiscovery;
+
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -17,11 +21,21 @@ public class BoilerClient {
 
 	public static void main(String[] args) throws InterruptedException {
 		final CountDownLatch finishLatch = new CountDownLatch(1);
+		
+		// jmdns discovery
+		ServiceInfo serviceInfo;
+		String service_type = "_boiler._tcp.local.";
+		serviceInfo = SimpleServiceDiscovery.run(service_type);
+		int port = serviceInfo.getPort();
+		String host = "localhost";
+		
+		
 		String[] emissionGases = { "co2", "nox", "sox" };
+		
 		JFrame f;
 		f = new JFrame();
 
-		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 4141).usePlaintext().build();
+		ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
 
 		BoilerServiceGrpc.BoilerServiceStub stub = BoilerServiceGrpc.newStub(channel);
 

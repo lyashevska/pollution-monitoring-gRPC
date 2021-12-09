@@ -4,7 +4,11 @@ import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
 
+import javax.jmdns.ServiceInfo;
 import javax.swing.*;
+
+import grpc.medicalWaste.SimpleServiceDiscovery;
+
 import java.util.Iterator;
 
 /**
@@ -14,10 +18,18 @@ import java.util.Iterator;
  */
 public class VentilationClient {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws InterruptedException {
+		
+		// jmdns discovery
+		ServiceInfo serviceInfo = null;
+		String service_type = "_ventilation._tcp.local.";
+		serviceInfo = SimpleServiceDiscovery.run(service_type);
+		int port = serviceInfo.getPort();
+		String host = "localhost";
+		
 		JFrame f;
 		f = new JFrame();
-		ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 8080).usePlaintext().build();
+		ManagedChannel channel = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
 
 		VentilationServiceGrpc.VentilationServiceBlockingStub stub = VentilationServiceGrpc.newBlockingStub(channel);
 
