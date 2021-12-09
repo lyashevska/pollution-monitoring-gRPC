@@ -217,9 +217,7 @@ public class App implements ActionListener {
 			String host = "localhost";
 
 			// build a channel
-
 			ManagedChannel channel1 = ManagedChannelBuilder.forAddress(host, port).usePlaintext().build();
-
 			medicalWasteServiceBlockingStub bstub = medicalWasteServiceGrpc.newBlockingStub(channel1);
 
 			// preparing message to send
