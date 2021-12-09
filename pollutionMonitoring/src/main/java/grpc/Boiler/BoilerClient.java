@@ -10,6 +10,7 @@ import javax.swing.*;
 
 import grpc.medicalWaste.SimpleServiceDiscovery;
 
+import java.net.InetAddress;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
@@ -28,7 +29,6 @@ public class BoilerClient {
 		serviceInfo = SimpleServiceDiscovery.run(service_type);
 		int port = serviceInfo.getPort();
 		String host = "localhost";
-		
 		
 		String[] emissionGases = { "co2", "nox", "sox" };
 		
