@@ -1,0 +1,23 @@
+syntax = "proto3";
+
+option java_package = "grpc.Ventilation";
+option java_outer_classname = "VentilationImpl";
+option java_multiple_files = true;
+
+message VentilationRequest {
+  string loc = 1;
+  bool air = 2;
+  string temp = 3;
+}
+
+message VentilationResponse {
+  string roomId = 1;
+  string temp = 2;
+  string date = 3;
+  string timeSampling = 4;
+
+}
+
+service VentilationService {
+  rpc sendVentilationRequest(VentilationRequest) returns (stream VentilationResponse);
+}
