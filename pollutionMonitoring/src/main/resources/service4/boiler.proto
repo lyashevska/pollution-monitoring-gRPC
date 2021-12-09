@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+option java_package = "grpc.Boiler";
+option java_outer_classname = "BoilerImpl";
+option java_multiple_files = true;
+
+message BoilerRequest{
+  string emissionGases = 1;
+}
+
+message BoilerResponse{
+   bool isSafe = 1;
+}
+
+service BoilerService{
+  rpc sendBoilerRequest(stream BoilerRequest) returns (BoilerResponse);
+}
+
